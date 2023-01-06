@@ -3,7 +3,7 @@
 
 # Architecture
 - [Architecture & Flows](./architecture_and_flow.md)
-- [Primitives](./primitives.md)
+- [Cryptographic Primitives](./primitives.md)
 - [Notes & Nullifiers](./notes_and_nullifiers.md)
 
 # 'App' Circuits
