@@ -1,5 +1,5 @@
 # zkRollup-privacy-utxo
-a zkRollup design Based on UTXO &amp; Protecting Privacy
+DRAFT: a zkRollup design Based on UTXO &amp; Protecting Privacy
 
 # Functionality
 **Register a Unique name**: 
@@ -30,7 +30,7 @@ how to efficiently pick out encrypted Notes belonging to me?<br>
 Easily to pick out SendNotes by recorded EncryptedSendNoteHashes, but still need to decrypt all RecvNotes’ encrypted AES key to identify all the owner’s RecvNotes.
 
 **Questions 2**: 
-how to encrypt note when transferring to the other one and how he/she could decrypt it?
+how to encrypt note when transferring to the other one and how he/she could decrypt it?<br>
 **Answer2**: 
 pick their exposed viewPubkey to encrypt the random AES key.
 
