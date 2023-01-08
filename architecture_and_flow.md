@@ -116,3 +116,5 @@ All funds within Anomix Network are originally sourced from L1 Mina account. You
 ## Transfer funds within L2
 All funds are storing as value notes within Anomix Network. With knowledge of UTXO model, fund transfer aligns with `Joint-Split` pattern. That means, if no one of your value notes is equal to or greater than the amount you plan to transfer, you would first aggregate (`Joint`) multiple value notes to make their sum equal enough or greater than. Then if their sum is greater than payment amount, you also need to `Split` a part (as a new value note) for your change(找零).
 
+## Withdraw funds to L1
+Withdraw fund to L1 also aligns with `Joint-Split` pattern. But the payment fund is transfer out of Anomix Network into Mina L1, and your `change` note stays still as a new value note within L2.
