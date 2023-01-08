@@ -110,3 +110,6 @@ Account spending key pairs are also derived from L1 wallet via the signature of 
 ### Account Migration
 When you carelessly expose your viewing keys or spending keys, or you wanna re-arrange your L2 account, then you need to migrate your account notes and value notes to new viewing keys and spending keys.
 
+## Deposit funds from L1
+All funds within Anomix Network are originally sourced from L1 Mina account. You are supposed to make a fund deposit from L1 wallet balance, then you could quickly get corresponding L2 value notes storing funds!
+
