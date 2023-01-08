@@ -96,3 +96,14 @@ Then Your own Anomix L2 account is born officially!
 
 Apparently you `never` need to specially-carefully-privately keep L2 account's private key, Since it could be generated any time with your L1 account any where.
 
+### Account Registration
+Account registration consists of two parts:
+* account alias
+* at least one account spending key.
+
+After you create an L2 account from L1 account, yet You don't have a unique account alias which acts as your ID within Anomix Network. Any one had better take an account alias for more clear & convinient recepient within payment behaviors.
+
+Along with account alias, you will register at least one spending key pair. Although your viewing key pair is able to both encrypt & decrypt notes and spend value notes, but it's more secure for you to have serveral spending keys only responsible for value note spending, then viewing key focus on note encryption & decryption.
+
+Account spending key pairs are also derived from L1 wallet via the signature of a special data piece.
+
