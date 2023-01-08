@@ -69,3 +69,19 @@ The pic briefly illustrates the overview of components & roles inside Anomix Net
   * `Anomix Sequencer` always listens for the L1 tx confirmation and maintain the Merkle tree root.
 
 
+# Flows
+
+## Account Creation & Registration & Migration
+
+Within Anomix Network, L2 Account is totally different from L1 account. In general, Anomix account consists of three parts: 
+* a unique account alias
+  * beside traditional wallet address, within Anomix Network, people could send funds to any one via target's account alias. 
+* viewing key pairs
+  * for encryption&decryption of notes, like account notes, value notes, note nullifiers.
+* spending key pairs
+  * to sign L2 tx for spending value notes.
+
+When you first create the Anomix account, it just consists of viewing key pairs, in which the public key for note encryption and the private key for note decryption as well as note spending.
+
+Further, You had better make an account registration, meaning registering a unique account alias as further recipient name, as well as registering serveral spending key pairs for `more convinient & secure` note spending across multiple devices.
+
