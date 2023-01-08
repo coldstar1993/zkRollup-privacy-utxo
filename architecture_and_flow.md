@@ -85,3 +85,14 @@ When you first create the Anomix account, it just consists of viewing key pairs,
 
 Further, You had better make an account registration, meaning registering a unique account alias as further recipient name, as well as registering serveral spending key pairs for `more convinient & secure` note spending across multiple devices.
 
+### Account Creation
+As a new user entering Anomix Network, you need to create your own `Account`. Anomix account is a key pair derived uniquely from your L1 wallet, making usage of different cryptographic algorithm from Mina account generation. Each L1 wallet could only generate one corresponding Anomix L2 account. 
+
+Brief progress of L2 account generation:
+* Anomix client asks your explorer wallet extension like `Auro wallet`, for the signature of a specific data piece.
+* Anomix client generate your L2 account's private key from the signature, then generate your L2 account's public key. The key pairs are the `viewing keys` of your L2 account.
+
+Then Your own Anomix L2 account is born officially! 
+
+Apparently you `never` need to specially-carefully-privately keep L2 account's private key, Since it could be generated any time with your L1 account any where.
+
