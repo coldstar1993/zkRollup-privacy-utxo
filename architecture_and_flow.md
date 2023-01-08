@@ -107,3 +107,6 @@ Along with account alias, you will register at least one spending key pair. Alth
 
 Account spending key pairs are also derived from L1 wallet via the signature of a special data piece.
 
+### Account Migration
+When you carelessly expose your viewing keys or spending keys, or you wanna re-arrange your L2 account, then you need to migrate your account notes and value notes to new viewing keys and spending keys.
+
