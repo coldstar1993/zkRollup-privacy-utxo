@@ -43,3 +43,16 @@ And, to improve the efficiency of proof generation at `User zkApps` and `Anomix 
 Further, Anomix Network has its own L2 explorer for user to take a high-level or detailed look at L2 status.
 * `Anomix L2 Explorer`
 
+## Storage Layers
+All L2 tx from `User zkApps` are persisted into Database by `Anomix Sequencer` after basical validation.
+
+When Anomix Network starts, `Anomix Sequencer` constructs Multiple Merkle Trees in memory based on all confirmed L2 tx set. These Merkle trees represent the Latest status of the whole L2 Network.
+* data tree
+  * account note 
+  * value note 
+* nullifier tree
+  * account note nullifier
+  * value note nullifier
+* root tree
+  * records all historical root of data tree.
+
