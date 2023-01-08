@@ -56,3 +56,16 @@ When Anomix Network starts, `Anomix Sequencer` constructs Multiple Merkle Trees 
 * root tree
   * records all historical root of data tree.
 
+## Overview of Rollup Processing
+<img src="./pic/AnomixNetwork_Architeture.png" style="border-radius: 20px">
+The pic briefly illustrates the overview of components & roles inside Anomix Network, as well as their cooperations. Now, let us make a brief description on the total flow
+
+* Any zkApps integrated with anomix sdk could easily leverage anonymous & private fund operations from anomix network. As pic, when user journey arrives funds operations(like pay), user locally construct a L2 user tx with zkproof and send it to `Anomix Sequencer`
+* `Anomix Sequencer` is responsible for serveral tasks
+  * recieve L2 user tx, and make a basical check on tx format & field validity, and then store it into database.
+  * a rollup pipeline would be started up in time to retrieve latest pending L2 tx from DB, divide them into pieces of given amount each, and make an proof aggregation for L2 user tx in each piece. we call this progress 'inner rollup proof generation' (leverage calculation service from the standalone `Anomix Proof Generator`).
+  * serveral inner rollup proof are further integrated into the final 'outer rollup proof' (leverage calculation service from the standalone `Anomix Proof Generator`). 
+  * invoke `Anomix Rollup Processor Contract` to make final circuit witness and generate final proof, then construct the final L1 tx and send it to Mina Network.
+  * `Anomix Sequencer` always listens for the L1 tx confirmation and maintain the Merkle tree root.
+
+
