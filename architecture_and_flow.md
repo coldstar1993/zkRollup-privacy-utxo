@@ -58,7 +58,7 @@ When Anomix Network starts, `Anomix Sequencer` constructs Multiple Merkle Trees 
 
 ## Overview of Rollup Processing
 <img src="./pic/AnomixNetwork_Architeture.png" style="border-radius: 20px">
-The pic briefly illustrates the overview of components & roles inside Anomix Network, as well as their cooperations. Now, let us make a brief description on the total flow
+The pic briefly demonstrates the overview of components & roles inside Anomix Network, as well as their cooperations. Now, let us make a brief description on the total flow
 
 * Any zkApps integrated with anomix sdk could easily leverage anonymous & private fund operations from anomix network. As pic, when user journey arrives funds operations(like pay), user locally construct a L2 user tx with zkproof and send it to `Anomix Sequencer`
 * `Anomix Sequencer` is responsible for serveral tasks
@@ -97,9 +97,10 @@ Then Your own Anomix L2 account is born officially!
 Apparently you `never` need to specially-carefully-privately keep L2 account's private key, Since it could be generated any time with your L1 account any where.
 
 ### Account Registration
-Account registration consists of two parts:
+Account registration consists of three parts:
 * account alias
-* at least one account spending key.
+* account viewing keypair
+* at least one account spending keypair.
 
 After you create an L2 account from L1 account, yet You don't have a unique account alias which acts as your ID within Anomix Network. Any one had better take an account alias for more clear & convinient recepient within payment behaviors.
 
@@ -113,8 +114,12 @@ When you carelessly expose your viewing keys or spending keys, or you wanna re-a
 ## Deposit funds from L1
 All funds within Anomix Network are originally sourced from L1 Mina account. You are supposed to make a fund deposit from L1 wallet balance, then you could quickly get corresponding L2 value notes storing funds!
 
+_NOTE:_ Based on zero knowledge power and encryption algorithm, no worry about the possibility of linking L1 deposit address and L2 value notes! 
+
 ## Transfer funds within L2
 All funds are storing as value notes within Anomix Network. With knowledge of UTXO model, fund transfer aligns with `Joint-Split` pattern. That means, if no one of your value notes is equal to or greater than the amount you plan to transfer, you would first aggregate (`Joint`) multiple value notes to make their sum equal enough or greater than. Then if their sum is greater than payment amount, you also need to `Split` a part (as a new value note) for your change(找零).
 
 ## Withdraw funds to L1
 Withdraw fund to L1 also aligns with `Joint-Split` pattern. But the payment fund is transfer out of Anomix Network into Mina L1, and your `change` note stays still as a new value note within L2.
+
+_NOTE:_ Based on zero knowledge power and encryption algorithm, no worry about the possibility of linking L2 value notes and L1 fund-recieving address! 
