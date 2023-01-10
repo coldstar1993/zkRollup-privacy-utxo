@@ -112,6 +112,8 @@ Account spending key pairs are normally also derived from L1 wallet via the sign
 
 _NOTE:_ You could also generate _Account spending key pairs_ by randomness source, rather than by L1 account. **But you must keep the private key carefully!**
 
+_NOTE:_ It's highly suggested that senders specify recipients have to spend the recieved funds by specified _Account spending key_. 
+
 ### Account Migration
 When you carelessly expose your viewing keys or spending keys, or you wanna re-arrange your L2 account, then you need to migrate your account notes and value notes to new viewing keys and spending keys.
 
