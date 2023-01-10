@@ -68,7 +68,7 @@ Account Note Nullifier covers three scenarios:
   * Then in _fund transfer_ or _fund deposit_ scenarios, sender would check if recipient's spending key is invalid (i.e. on `nullifier tree`) first.  //TODO should in circuit?
   * calculation: `account_spending_key_nullifier = pedersen::compress(account_viewing_key_nullifier, spending_public_key)`
 
-_NOTE:_ If a user make existing `account viewing key` invalid by nullifier, all `account spending key` registered to this account will be 
+_NOTE:_ If a user make existing `account viewing key` invalid by nullifier, all existing `account spending key` registered to this account will not be used by senders within new fund transfers.
 
 # Value Note Nullifier
 
