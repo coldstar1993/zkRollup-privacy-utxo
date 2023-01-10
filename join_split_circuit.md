@@ -13,7 +13,7 @@ User deposits L1 funds to `Anomix Rollup Processor Contract` account, and will b
 
 User Journey as blow:
 1. user execute method about fund deposits on `Anomix Rollup Processor Contract` locally, and then construct an _L1 tx_ with specified L1 fund amount.
-2. circuit pseudo code:
+2. circuit pseudo code (zkProgram):
    * circuit inputs (_highlighted fields are public inputs_)
         * user construct a new _value note_ : <br>
             {<br>
@@ -66,7 +66,7 @@ User Journey as blow:
 1. user choose two unspent _value notes_ for inputs.
 2. user construct two new _value notes_.
      * Note: asset_id in four _value_notes_ above shoule aligned! 
-3. circuit pseudo code:
+3. circuit pseudo code (zkProgram):
    * circuit inputs (_highlighted fields are public inputs_):
      * value_note_inputA
      * _value_note_inputA commitment_
@@ -173,7 +173,7 @@ User Journey as blow:
 1. user choose two unspent _value notes_ for inputs.
 2. user construct two new _value notes_.
      * Note: asset_id in four _value_notes_ above shoule aligned! 
-3. circuit pseudo code:
+3. circuit pseudo code (zkProgram):
    * circuit inputs (_highlighted fields are public inputs_):
      * value_note_inputA
      * _value_note_inputA commitment_
