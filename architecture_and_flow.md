@@ -56,6 +56,8 @@ When Anomix Network starts, `Anomix Sequencer` constructs Multiple Merkle Trees 
 * root tree
   * records all historical root of data tree.
 
+_Note:_ All leaves nodes is based on Hash of plain txt instead of encrypted notes.
+
 ## Overview of Rollup Processing
 <img src="./pic/AnomixNetwork_Architeture.png" style="border-radius: 20px">
 The pic briefly demonstrates the overview of components & roles inside Anomix Network, as well as their cooperations. Now, let us make a brief description on the total flow
