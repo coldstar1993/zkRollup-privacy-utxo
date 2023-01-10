@@ -26,7 +26,6 @@ This directory contains the Anomix Network specifications.
   * Withdraw funds to L1
 * Rollup circuit specification (sometimes referred to as "inner rollup")
 * Root rollup circuit specification (sometimes referred to as "outer rollup")
-* Root verifier circuit specification
 * Anomix Network On Mina-Berkeley
   * Anomix Explorer
   * Anomix SDK
