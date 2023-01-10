@@ -106,9 +106,11 @@ Account registration consists of three parts:
 
 After you create an L2 account from L1 account, yet You don't have a unique account alias which acts as your ID within Anomix Network. Any one had better take an account alias for more clear & convinient recepient within payment behaviors.
 
-Along with account alias, you will register at least one spending key pair. Although your viewing key pair is able to both encrypt & decrypt notes and spend value notes, but it's more secure for you to have serveral spending keys only responsible for value note spending, then viewing key focus on note encryption & decryption.
+Along with account alias, you will register at least one spending key pair. Although your viewing key pair is able to both encrypt & decrypt notes and spend value notes, but it's more secure for you to have serveral spending keys only responsible for value note spending, then make viewing key focus on note encryption & decryption.
 
-Account spending key pairs are also derived from L1 wallet via the signature of a special data piece.
+Account spending key pairs are normally also derived from L1 wallet via the signature of a special data piece.
+
+_NOTE:_ You could also generate _Account spending key pairs_ by randomness source, rather than by L1 account. **But you must keep the private key carefully!**
 
 ### Account Migration
 When you carelessly expose your viewing keys or spending keys, or you wanna re-arrange your L2 account, then you need to migrate your account notes and value notes to new viewing keys and spending keys.
@@ -125,3 +127,6 @@ All funds are storing as value notes within Anomix Network. With knowledge of UT
 Withdraw fund to L1 also aligns with `Joint-Split` pattern. But the payment fund is transfer out of Anomix Network into Mina L1, and your `change` note stays still as a new value note within L2.
 
 _NOTE:_ Based on zero knowledge power and encryption algorithm, no worry about the possibility of linking L2 value notes and L1 fund-recieving address! 
+
+# an L2 user Tx Journey
+// TODO
