@@ -69,14 +69,14 @@ User Journey as blow:
 3. circuit pseudo code:
    * circuit inputs (_highlighted fields are public inputs_):
      * value_note_inputA
-     * `value_note_inputA commitment`
+     * _value_note_inputA commitment_
      * existence merkle proof of _value_note_inputA commitment_ on _data tree_
      * `value_note_inputA nullifier`
      * non-existence merkle proof of _value_note_inputA nullifier_ on _nullifier tree_
      * signature of spending value_note_inputA
  
      * value_note_inputB
-     * `value_note_inputB commitment`
+     * _value_note_inputB commitment_
      * existence merkle proof of _value_note_inputB commitment_ on _data tree_
      * `value_note_inputB nullifier`
      * non-existence merkle proof of _value_note_inputB nullifier_ on _nullifier tree_
@@ -94,6 +94,9 @@ User Journey as blow:
             }
      * `value_note_outputC commitment`
      * non-existence merkle proof of _value_note_outputC commitment_ on _data tree_
+     * non-existence merkle proof of _value_note_outputC.owner_pubkey_  on _nullifier tree_
+     * if _value_note_outputC.account_require_ == 1: 
+       * existence merkle proof of _value_note_outputC.owner_pubkey_  on _data tree_
 
      * value_note_outputD :<br>
             {<br>
@@ -107,6 +110,10 @@ User Journey as blow:
             }
      * `value_note_outputD commitment`
      * non-existence merkle proof of _value_note_outputD commitment_ on _data tree_
+     * non-existence merkle proof of _value_note_outputD.owner_pubkey_  on _nullifier tree_
+     * if _value_note_outputD.account_require_ == 1: 
+       * existence merkle proof of _value_note_outputD.owner_pubkey_  on _data tree_
+
      * _transfer fee_
 
    * circuit constraints:
@@ -126,20 +133,127 @@ User Journey as blow:
      
      * CHECK _value_note_outputC commitment_ is from _value_note_outputC_
      * CHECK non-existence merkle proof of _value_note_outputC commitment_ on _data tree_
+     * CHECK non-existence merkle proof of _value_note_outputC.owner_pubkey_  on _nullifier tree_
+     * if _value_note_outputC.account_require_ == 1: 
+       * CHECK existence merkle proof of _value_note_outputC.owner_pubkey_  on _data tree_
 
      * CHECK _value_note_outputD commitment_ is from _value_note_outputD_
      * CHECK non-existence merkle proof of _value_note_outputD commitment_ on _data tree_
+     * CHECK non-existence merkle proof of _value_note_outputD.owner_pubkey_  on _nullifier tree_
+     * if _value_note_outputD.account_require_ == 1: 
+       * CHECK existence merkle proof of _value_note_outputD.owner_pubkey_  on _data tree_
 
      * CHECK 4 asset_id equals each other
      * //TODO CHECK 4 input_nullifier ??
 4. At last, user construct a L2 tx with the witness and broadcast it to `Anomix Sequencer`. 
-5. And later soon, `Anomix Sequencer` will maintain _data tree_ and _nullifier tree_.
+5. user encrypt _value_note_outputC_ with recipientC's _account viewing key_
+6. user encrypt _value_note_outputC_ with recipientD's _account viewing key_
+7. And later soon, `Anomix Sequencer` will maintain _data tree_ and _nullifier tree_.
+   * `value_note_inputA nullifier` will be added into _nullifier tree_
+   * `value_note_inputB nullifier` will be added into _nullifier tree_
+   * `value_note_outputC commitment` will be added into _data tree_ 
+   * `value_note_outputD commitment` will be added into _data tree_ 
 
 # Withdraw funds to L1
-Similar to _Transfer funds within L2_ flow, 
+Similar to _Transfer funds within L2_ flow, _Withdraw funds to L1_ flow align with : 
+    ```
+    value_note_inputA + value_note_inputB --> value_note_outputC + value_note_outputD
+    ```
+
+However, _value_note_outputD_ is totally different with normal _value note_, for tracing withdraw info , seen as below in circuit.
+
+Besides, _value_note_outputD_ will be finally encrypted by sender's own _account viewing key_.
 
 User Journey as blow:
-1. 
-2. circuit pseudo code:
-   * circuit inputs (_highlighted fields are public inputs_)
-   * circuit constraints
+1. user choose two unspent _value notes_ for inputs.
+2. user construct two new _value notes_.
+     * Note: asset_id in four _value_notes_ above shoule aligned! 
+
+User Journey as blow:
+1. user choose two unspent _value notes_ for inputs.
+2. user construct two new _value notes_.
+     * Note: asset_id in four _value_notes_ above shoule aligned! 
+3. circuit pseudo code:
+   * circuit inputs (_highlighted fields are public inputs_):
+     * value_note_inputA
+     * _value_note_inputA commitment_
+     * existence merkle proof of _value_note_inputA commitment_ on _data tree_
+     * `value_note_inputA nullifier`
+     * non-existence merkle proof of _value_note_inputA nullifier_ on _nullifier tree_
+     * signature of spending value_note_inputA
+ 
+     * value_note_inputB
+     * _value_note_inputB commitment_
+     * existence merkle proof of _value_note_inputB commitment_ on _data tree_
+     * `value_note_inputB nullifier`
+     * non-existence merkle proof of _value_note_inputB nullifier_ on _nullifier tree_
+     * signature of spending value_note_inputB
+   
+     * value_note_outputC :<br>
+            {<br>
+                secret, <br>
+                owner_pubkey: recipientC's viewing pubkey or an spending pubkey <br>
+                account_require: 0 or 1, <br>
+                creator_pubkey: zero or _L2 sender's alias_, <br>
+                value, <br>
+                asset_id,  <br>
+                input_nullifier: //TODO ??  <br>
+            }
+     * `value_note_outputC commitment`
+     * non-existence merkle proof of _value_note_outputC commitment_ on _data tree_
+     * non-existence merkle proof of _value_note_outputC.owner_pubkey_  on _nullifier tree_
+     * if _value_note_outputC.account_require_ == 1: 
+       * existence merkle proof of _value_note_outputC.owner_pubkey_  on _data tree_
+
+     * value_note_outputD :<br>
+            {<br>
+                secret, <br>
+                **owner_pubkey: recipientD's L1 address,** <br>
+                **account_require: 0,** <br>
+                creator_pubkey: zero or _L2 sender's alias_, <br>
+                value, <br>
+                asset_id,  <br>
+                input_nullifier: //TODO ??  <br>
+            }
+     * `value_note_outputD commitment`
+     * non-existence merkle proof of _value_note_outputD commitment_ on _data tree_
+     * `value_note_outputD nullifier`
+
+     * _transfer fee_
+
+   * circuit constraints:
+     * CHECK value_note_inputA.value + value_note_inputB.value == value_note_outputC.value + value_note_outputD.value + _transfer fee_
+
+     * CHECK _value_note_inputA commitment_ is from _value_note_inputA_
+     * CHECK existence merkle proof of _value_note_inputA commitment_ on _data tree_
+     * CHECK _value_note_inputA nullifier_ is from _value_note_inputA_
+     * CHECK non-existence merkle proof of _value_note_inputA nullifier_ on _nullifier tree_
+     * VERIFY signature of spending value_note_inputA with value_note_inputA.owner_pubkey
+
+     * CHECK _value_note_inputB commitment_ is from _value_note_inputB_
+     * CHECK existence merkle proof of _value_note_inputB commitment_ on _data tree_
+     * CHECK _value_note_inputB nullifier_ is from _value_note_inputB_
+     * CHECK non-existence merkle proof of _value_note_inputB nullifier_ on _nullifier tree_
+     * VERIFY signature of spending value_note_inputB with value_note_inputB.owner_pubkey
+     
+     * CHECK _value_note_outputC commitment_ is from _value_note_outputC_
+     * CHECK non-existence merkle proof of _value_note_outputC commitment_ on _data tree_
+     * CHECK non-existence merkle proof of _value_note_outputC.owner_pubkey_  on _nullifier tree_
+     * if _value_note_outputC.account_require_ == 1: 
+       * CHECK existence merkle proof of _value_note_outputC.owner_pubkey_  on _data tree_
+
+     * CHECK _value_note_outputD commitment_ is from _value_note_outputD_
+     * CHECK non-existence merkle proof of _value_note_outputD commitment_ on _data tree_
+     * CHECK _value_note_outputD nullifier_ is from _value_note_outputD_
+
+     * CHECK 4 asset_id equals each other
+     * //TODO CHECK 4 input_nullifier ??
+4. At last, user construct a L2 tx with the witness and broadcast it to `Anomix Sequencer`. 
+5. user encrypt _value_note_outputC_ with recipientC's _account viewing key_
+6. user encrypt **_value_note_outputD_** with **user itself's _account viewing key_**
+7. And later soon, `Anomix Sequencer` will maintain _data tree_ and _nullifier tree_.
+   * `value_note_inputA nullifier` will be added into _nullifier tree_
+   * `value_note_inputB nullifier` will be added into _nullifier tree_
+   * `value_note_outputC commitment` will be added into _data tree_ 
+   * `value_note_outputD commitment` will be added into _data tree_ 
+   * **`value_note_outputD nullifier` will be added into _nullifier tree_**
