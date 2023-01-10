@@ -15,7 +15,7 @@ Recall that in previous descriptions, within `Account Registration`, user has to
 
 User Journey as blow:
 1. user provide an alias and spending keypair,(normally Anomix client will first check uniqueness & correctness of them, and prompt user if any thing wrong)
-2. circuit pseudo code
+2. circuit pseudo code (zkProgram)
   * circuit inputs (_highlighted fields are public inputs_)
     * alias
     * `alias_nullifier`
@@ -88,7 +88,7 @@ Scenario steps:
 1. when `Account Migration` flow starts, user is prompted to switch the explorer wallet extention(like Auro wallet) to a new L1 account.  
 2. Then Anomix client asks your explorer wallet extension for the signature of a specific data piece.
 3. Anomix client generate your L2 account's private key from the signature, then generate your L2 account's public key. The key pairs are the new viewing keys of your L2 account.
-4. circuit pseudo code:
+4. circuit pseudo code (zkProgram):
   * circuit inputs (_highlighted fields are public inputs_)
     * new account viewing private key,
     * `new account viewing public key`,
@@ -126,7 +126,7 @@ Scenario One -- user just update _account viewing key_:
 
 Scenario Two -- user never update _account viewing key_: 
 1. User provide a new _account spending key_
-2. circuit pseudo code:
+2. circuit pseudo code (zkProgram):
   * circuit inputs (_highlighted fields are public inputs_)
     * alias
     * `alias_nullifier`
