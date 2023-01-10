@@ -16,13 +16,13 @@ Consists of the following:
 
 - `secret`: a random value to hide the contents of the
   commitment, just for more randomness.
-- `owner_pubkey`: the public key of the owner of the value note. 
-- `account_required`: 0--`spending_pubkey` is _account view public key_ of recipient; 1--`spending_pubkey` one _account spending public key_ of recipient.
-- `spending_pubkey`: if recipient never registers account, it must be _account view public key_ of recipient, or it must be one _account spending public key_ of recipient .
-- `creator_pubkey`: Optional, can be zero. Allows the sender of a value note to inform the recipient about who the note came from.
+- `owner_pubkey`: i.e. _to_. if recipient never registers account, it must be _account view public key_ of recipient, or it must be one _account spending public key_ of recipient .
+- `account_required`: 0--`owner_pubkey` is _account view public key_ of recipient; 1--`owner_pubkey` one _account spending public key_ of recipient.
+- `creator_pubkey`: i.e. _from_. Optional, can be zero. Allows the sender of a value note to inform the recipient of who the note came from.
 - `value`: the value contained in this note.
 - `asset_id`: unique identifier for the 'currency' of this note. Currently we place '`Mina`' token as `0`. On the future, we will add more assets from Mina ecology.
 - `input_nullifier`: In order to create a value note, another value note must be nullified (except when depositing, where a 'gibberish' nullifier is generated). We include the `input_nullifier` here to ensure the commitment is unique (which, in turn, will ensure this note's nullifier will be unique).
+
 
 **partial commitment**
 
