@@ -17,7 +17,8 @@ Consists of the following:
 - `secret`: a random value to hide the contents of the
   commitment, just for more randomness.
 - `owner_pubkey`: the public key of the owner of the value note. 
-- `account_required`: Is the note linked to an existing account or can the note be spent without an account, by directly signing with the owner key
+- `account_required`: 0--`spending_pubkey` is _account view public key_ of recipient; 1--`spending_pubkey` one _account spending public key_ of recipient.
+- `spending_pubkey`: if recipient never registers account, it must be _account view public key_ of recipient, or it must be one _account spending public key_ of recipient .
 - `creator_pubkey`: Optional, can be zero. Allows the sender of a value note to inform the recipient about who the note came from.
 - `value`: the value contained in this note.
 - `asset_id`: unique identifier for the 'currency' of this note. Currently we place '`Mina`' token as `0`. On the future, we will add more assets from Mina ecology.
@@ -55,6 +56,8 @@ Account Note Nullifier covers three scenarios:
   * when a new user register a new alias, she/he has to provide _non-existence proof_ on `nullifier tree` for the new alias. _That's to say: everyone would have a unique alias!_
   * calculation: `alias nullifier = pedersen::compress(alias)`
 
+  _Note:_ Please don't forget you alias, otherwise you cann't get it back! Animix Network only store `alias nullifier` on _nullifier tree_.
+
 * account viewing key nullifier
   * when user make a `Account Migration` due to viewing key exposure, it has to make the old viewing key into a nullifier, to anounce that the old key is invalid.
   * Then in _fund transfer_ or _fund deposit_ scenarios, sender would check if recipient's viewing key is invalid (i.e. on `nullifier tree`) first before _value note_'s encryption. //TODO should in circuit?
@@ -64,6 +67,8 @@ Account Note Nullifier covers three scenarios:
   * when user carelessly expose one spending key, then he is supposed to transfer unspent value notes associated with this spending key into a new value notes associated with another spending key! Then he needs to make the exposing _spending public key_ into nullifier, to anounce it's invalid now.
   * Then in _fund transfer_ or _fund deposit_ scenarios, sender would check if recipient's spending key is invalid (i.e. on `nullifier tree`) first.  //TODO should in circuit?
   * calculation: `account_spending_key_nullifier = pedersen::compress(account_viewing_key_nullifier, spending_public_key)`
+
+_NOTE:_ If a user make existing `account viewing key` invalid by nullifier, all `account spending key` registered to this account will be 
 
 # Value Note Nullifier
 
