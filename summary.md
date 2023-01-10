@@ -13,7 +13,6 @@
 # Rollup Circuits
 - [Rollup Circuit](./rollup_circuit.md)
 - [Root Rollup Circuit](./root_rollup_circuit.md)
-- [Root Verifier Circuit](./root_verifier_circuit.md)
 
 # Contracts
 - [Rollup Contract](./rollup_contract.md)
